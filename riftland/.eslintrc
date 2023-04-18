@@ -2,10 +2,17 @@
   "extends": [
     "react-app"
   ],
+  "ignorePatterns": ["node_modules/*"],
   "rules" : {
       "quotes": ["error", "single"],
       "indent": ["error", 2],
       "key-spacing": ["error", { "afterColon": true}],
+      "comma-spacing": ["error", { "before": false, "after": true }],
+      "object-curly-spacing": ["error", "always"],
+      "semi": ["error", "never"],
+      "arrow-spacing": ["error", { "before": true, "after": true }],
+
+      "space-infix-ops":"error"
         // "no-console": "error"
   }
 }

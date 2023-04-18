@@ -28,7 +28,7 @@ export const FloatingIsland = () => {
     material.lightMap = material.map
     material.lightMapIntensity = 400
     material.color = new Color(0.04, 0.06, 0.1)
-    console.debug(material, 'mesh.material')
+
   }, [gltf])
 
   return(

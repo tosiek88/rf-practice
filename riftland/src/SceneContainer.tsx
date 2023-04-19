@@ -2,6 +2,7 @@ import { Suspense } from 'react'
 import { Environment, OrbitControls, PerspectiveCamera } from '@react-three/drei'
 import { FloatingIsland } from './FloatingIslands'
 import { Portal } from './Portal'
+import { FloatingRocks } from './FloatingRocks'
 
 export const SceneContainer = () => {
 
@@ -14,5 +15,7 @@ export const SceneContainer = () => {
 
     <FloatingIsland/>
     <Portal/>
+    <FloatingRocks/>
+
   </Suspense>
 }

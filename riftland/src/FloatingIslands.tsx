@@ -2,6 +2,7 @@ import { useLoader } from '@react-three/fiber'
 import { useEffect } from 'react'
 import { BufferAttribute, Color } from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { getMaterial, getMesh, getUvs } from './utils'
 
 export const FloatingIsland = () => {
   const gltf = useLoader(GLTFLoader, '/models/floating_island.glb')
@@ -9,25 +10,23 @@ export const FloatingIsland = () => {
   useEffect(() => {
     if(!gltf) return
 
-    const object3d = gltf.scene.getObjectByName('Island')
-    if(!object3d?.isObject3D) return
-    if(!(object3d as THREE.Mesh).isMesh) return
+    const islandObject3d = gltf.scene.getObjectByName('Island')
+    if(!islandObject3d) return
 
-    const mesh:THREE.Mesh = (object3d as THREE.Mesh)
+    const islandMesh = getMesh(islandObject3d)
+    if(!islandMesh) return
 
-    const uv = (mesh as THREE.Mesh).geometry.attributes.uv
-    if(!(uv instanceof BufferAttribute)) return
+    const uvs = getUvs(islandMesh)
+    if(!uvs) return 
 
-    const uvs = (uv as BufferAttribute).array
+    islandMesh.geometry.setAttribute('uv2', new BufferAttribute(uvs.array, 2))
 
-    mesh.geometry.setAttribute('uv2', new BufferAttribute(uvs, 2))
+    const islandMaterial = getMaterial(islandMesh)
+    if(!islandMaterial) return
 
-    if(Array.isArray(mesh.material)) return 
-    if(!(mesh.material as THREE.MeshStandardMaterial).isMaterial) return 
-    const material = (mesh.material as THREE.MeshStandardMaterial)
-    material.lightMap = material.map
-    material.lightMapIntensity = 400
-    material.color = new Color(0.04, 0.06, 0.1)
+    islandMaterial.lightMap = islandMaterial.map
+    islandMaterial.lightMapIntensity = 400
+    islandMaterial.color = new Color(0.04, 0.06, 0.1)
 
   }, [gltf])
 

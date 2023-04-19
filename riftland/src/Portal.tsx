@@ -26,8 +26,6 @@ export const Portal = () => {
     if(!maskMaterial) return
 
     maskMaterial.side = DoubleSide
-
-    console.debug(maskObject3d)
   })
 
   return (

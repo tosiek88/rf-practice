@@ -26,5 +26,3 @@ export const getMaterial = (mesh:THREE.Mesh|undefined):THREE.MeshStandardMateria
 
   return (mesh.material as THREE.MeshStandardMaterial)
 }
-
-// export const getMateria
